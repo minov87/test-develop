@@ -1,0 +1,19 @@
+<html lang='ko_kr'>
+  <head>
+    <title>Polls Detail page</title>
+  </head>
+  <body>
+    <h1>질문 : {{question.question_text}}</h1>
+    {% if error_message %}
+      <p style="font-weight:bold;color:red;">{{error_message}}</p>
+    {% endif %}
+
+    <form action="{% url 'polls:vote' question.id %}" method="post">
+      {% csrf_token %}
+      {% for choice in question.choice_set.all %}
+          <input type="radio" id="choice{{ forloop.counter }}" name="choice" value="{{choice.id}}" /> <label for="choice{{ forloop.counter }}">{{choice.choice_text}}</label><br />
+      {% endfor %}
+      <input type="submit" value="투표" />
+    </form>
+  </body>
+</html>

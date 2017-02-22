@@ -1,0 +1,16 @@
+<html lang='ko_kr'>
+  <head>
+    <title>Polls Index page</title>
+  </head>
+  <body>
+    {% if latest_question_list %}
+    <ul>
+      {% for question in latest_question_list %}
+        <li><a href="{% url 'polls:detail' question.id %}">{{question.question_text}}</a></li>
+      {% endfor %}
+    </ul>
+    {% else %}
+      <p>선택 가능한 질문이 없습니다.</p>
+    {% endif %}
+  </body>
+</html>
