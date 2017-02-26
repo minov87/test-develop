@@ -21,7 +21,7 @@ class IndexView(generic.ListView):
 		# 최근 등록 5개를 노출하되, 미래의 질문은 비노출 처리
 		# Questions whose pub_date is less than or equal to -
 		# that is, earlier than or equal to - timezone.now
-		return Question.objects.filter()
+		return Question.objects.filter(
 			pub_date__lte=timezone.now()
 		).order_by('-pub_date')[:5]
 
