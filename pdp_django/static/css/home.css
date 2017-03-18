@@ -10,3 +10,11 @@ div#homeimg {
     padding: 5px 0 1px 0;
     text-align: center;
 }
+
+div#content_home > table#applist > .abi {
+    font: italic bold 12px "Lucida Grande", Verdana, Arial, sans-serif;
+}
+
+div#content_home > table#applist > .ai {
+    font: italic 12px "Lucida Grande", Verdana, Arial, sans-serif;
+}

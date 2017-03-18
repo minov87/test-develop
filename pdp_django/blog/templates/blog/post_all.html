@@ -1,21 +1,28 @@
+{% extends "base.html" %}
 
-<h1>Blog list</h1>
-{% for post in posts %}
-    <h2><a href='{{post.get_absolute_url}}'>{{ post.title }}</a></h2>
-    {{ post.modify_date|date:"N d, Y" }}
-{% endfor %}
+{% block title %}Django Blog Post List{% endblock %}
 
-<br />
-<div>
-    <span>
-        {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}">이전 페이지</a>
-        {% endif %}
+{% block content %}
+    <div id="content">
+        <h1>Blog list</h1>
+        {% for post in posts %}
+            <h2><a href='{{post.get_absolute_url}}'>{{ post.title }}</a></h2>
+            {{ post.modify_date|date:"N d, Y" }}
+        {% endfor %}
 
-        Page {{ page_obj.number }} of {{ page_obj.paginator.num_psges }}
+        <br />
+        <div>
+            <span>
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">이전 페이지</a>
+                {% endif %}
 
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">다음 페이지</a>
-        {% endif %}
-    </span>
-</div>
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_psges }}
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">다음 페이지</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+{% endblock %}

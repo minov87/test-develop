@@ -8,7 +8,7 @@
 {% block content %}
     <div id="content_home">
         <div id="homeimg">
-            <a href="/"><img src="{% static 'img/django-actor-big.jpg' %}" style="height:256px;" /></a>
+            <a href="/"><img src="{% static 'img/background.jpg' %}" style="height:300px;" /></a>
             <h4 style="margin: 0;">This is Django powered web site.</h4>
         </div>
 
@@ -18,7 +18,24 @@
 
         <table id="applist">
             <tr>
-                <td>#</td>
+                <td><a class="abi" href="{% url 'bookmark:index' %}">Bookmark</a></td>
+                <td>Blah~ Blah~ Blah~</td>
+                <td class="Edit"><a class="ai">Add</a></td>
+                <td class="Edit"><a class="ai">Change</a></td>
+            </tr>
+
+            <tr>
+                <td><a class="abi" href="{% url 'blog:index' %}">Blog</a></td>
+                <td>Blah~ Blah~ Blah~</td>
+                <td class="Edit"><a class="ai">Add</a></td>
+                <td class="Edit"><a class="ai">Change</a></td>
+            </tr>
+
+            <tr>
+                <td><a class="abi" href="#">Photo</a></td>
+                <td>Blah~ Blah~ Blah~</td>
+                <td class="Edit"><a class="ai">Add</a></td>
+                <td class="Edit"><a class="ai">Change</a></td>
             </tr>
         </table>
     </div>
@@ -26,6 +43,6 @@
 
 {% block footer %}
     <div id="footer">
-        Copyright Minov 2017
+        &copy; Minov 2017
     </div>
 {% endblock footer %}
