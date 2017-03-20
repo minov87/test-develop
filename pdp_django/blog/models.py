@@ -4,6 +4,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.db import models
 #from django.core.urlresolvers import reverse #django 버젼이 1.9 이하일 경우
 from django.urls import reverse #django 버젼이 1.10 이상일 경우
+from tagging.fields import TagField
 
 # Create your models here.
 @python_2_unicode_compatible
@@ -14,6 +15,7 @@ class Post(models.Model):
     content = models.TextField('CONTENT', help_text='컨텐츠 내용')
     create_date = models.DateTimeField('Create Date', auto_now_add=True)
     modify_date = models.DateTimeField('Modify Date', auto_now=True)
+    tag = TagField()
 
     class Meta:
         verbose_name = 'post'

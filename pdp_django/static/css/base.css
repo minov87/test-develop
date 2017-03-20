@@ -27,10 +27,19 @@ div#menu{
 }
 
 div#content{
-    postion: absolute;
+    position: absolute;
     top: 70px;
     left: 50px;
     right: 50px;
+}
+
+div#footer{
+    position: absolute;
+    bottom: 20px;
+    left: 50px;
+    right: 50px;
+    height: 30px;
+    border-top: 1px solid #ccc;
 }
 
 .maintitle{
@@ -71,7 +80,7 @@ div#menu > li {
 
 div#menu li ul{
     display: none;
-    position: absolute;;
+    position: absolute;
     margin: 0;
     padding: 10px 10px 5px 10px;
     list-style: none;
