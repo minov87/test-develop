@@ -7,11 +7,22 @@
         {% load staticfiles %}
         <link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}" />
         <link rel="stylesheet" type="text/css" href="{% block extrastyle %}{% endblock %}" />
+        <script type="text/javascript" src="{% static "js/jquery-3.2.0.min.js" %}"></script>
     </head>
     <body>
         <div id="header">
             <h2 class="maintitle">PDP Django Web Programming</h2>
-            <h4 class="welcome">Welcome, <a href="#">minov</a> / <a href="#">Change pwd</a> / <a href="#">Logout</a></h4>
+            <h4 class="welcome">Welcome,
+                {% if user.is_active %}
+                    <strong>{% firstof user.get_short_name user.get_username %}</strong> /
+                    <a href="{% url 'password_change' %}">Change pwd</a> /
+                    <a href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                    Guest /
+                    <a href="{% url 'login' %}">Login</a> /
+                    <a href={% url 'register' %}>Register</a>
+                {% endif %}
+            </h4>
         </div>
 
         <div id="menu">

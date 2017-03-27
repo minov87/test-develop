@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}User Logout{% endblock %}
+
+{% load staticfiles %}
+{% block extrastyle %}{% static "css/forms.css" %}{% endblock %}
+
+{% block content %}
+    <div id="content">
+        <h1>사용자 로그아웃</h1>
+        <p>정상적으로 로그아웃 되었습니다. :) 오늘 하루도 방문해 주셔서 감사합니다.<br />즐거운 하루 되세요! ;)</p>
+        <p><a href="{% url 'login' %}">로그인</a></p>
+    </div>
+{% endblock %}

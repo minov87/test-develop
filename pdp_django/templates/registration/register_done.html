@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}User Register Done{% endblock %}
+
+{% load staticfiles %}
+{% block extrastyle %}{% static "css/forms.css" %}{% endblock %}
+
+{% block content %}
+    <div id="content">
+        <h1>신규 사용자 등록이 완료 되었습니다. ;)</h1>
+
+        <p>아래의 로그인 버튼을 통하여 접속하시면 됩니다 X)</p>
+        <p><a href="{% url 'login' %}">로그인</a></p>
+    </div>
+{% endblock %}
