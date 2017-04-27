@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Django Bookmark Form{% endblock %}
+
+{% load staticfiles %}
+{% block extrastyle %}{% static "css/forms.css" %}{% endblock %}
+
+{% block content %}
+    <div id="content">
+        <h1>Post Change - 사용자 : {{user}}</h1>
+
+        <table class="change-list">
+            <tr>
+                <th>제목</th>
+                <th>설명</th>
+                <th>등록자</th>
+                <th>수정</th>
+                <th>삭제</th>
+            </tr>
+
+            {% for item in object_list %}
+                <tr>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.discription }}</td>
+                    <td>{{ item.owner }}</td>
+                    <td><a href="{% url 'blog:update' item.id %}">수정</a></td>
+                    <td><a href="{% url 'blog:delete' item.id %}">삭제</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

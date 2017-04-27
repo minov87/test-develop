@@ -12,6 +12,10 @@ from blog.forms import PostSearchForm
 from django.db.models import Q
 from django.shortcuts import render
 
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from pdp_django.views import LoginRequiredMixin
+
 # Create your views here.
 class TagTV(TemplateView):
     template_name = 'tagging/tagging_cloud.html'
@@ -68,3 +72,28 @@ class SearchFormView(FormView):
         context['object_list'] = post_list
 
         return render(self.request, self.template_name, context)
+
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    fields = ['title', 'slug', 'discription', 'content', 'tag']
+    initial = {'slug': 'auto-filling-do-not-input'}
+    success_url = reverse_lazy('blog:index')
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super(PostCreateView, self).form_valid(form)
+
+class PostChangeLV(LoginRequiredMixin, ListView):
+    template_name = 'blog/post_change_list.html'
+
+    def get_queryset(self):
+        return Post.objects.filter(owner=self.request.user)
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
+    model = Post
+    fields = ['title', 'slug', 'discription', 'content', 'tag']
+    success_url = reverse_lazy('blog:index')
+
+class PostDeleteView(LoginRequiredMixin, DeleteView):
+    model = Post
+    success_url = reverse_lazy('blog:index')

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Django Bookmark Form{% endblock %}
+
+{% load staticfiles %}
+{% block extrastyle %}{% static "css/forms.css" %}{% endblock %}
+
+{% block content %}
+    <div id="content">
+        <h1>Post Delete - 사용자 : {{user}}</h1>
+
+        <form action="" method="post">{% csrf_token %}
+            <p>정말로 해당 포스트 [ "{{ object }}" ] 를 삭제하시겠습니까 ?</p>
+            <input type="submit" value="Confirm" />
+        </form>
+    </div>
+{% endblock %}

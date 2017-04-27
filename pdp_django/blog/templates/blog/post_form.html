@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Django Bookmark Form{% endblock %}
+
+{% load staticfiles %}
+{% block extrastyle %}{% static "css/forms.css" %}{% endblock %}
+
+{% block content %}
+    <div id="content">
+        <h1>Post Create/Update - 사용자 : {{user}}</h1>
+
+        <form action="" method="post">{% csrf_token %}
+            {% if form.errors %}
+                <p class="errornote">앗 이런! 입력한 내용에 문제가 있네요.<</p>
+            {% endif %}
+
+            <p>본인의 포스트를 추가하거나 수정할 수 있습니다.</p>
+
+            <fieldset class="aligned">
+                <div class="form-row">{{ form.title.label_tag }} {{ form.title }}</div>
+                <div class="form-row">{{ form.slug.label_tag }} {{ form.slug }}</div>
+                <div class="form-row">{{ form.discription.label_tag }} {{ form.discription }}</div>
+                <div class="form-row">{{ form.content.label_tag }} {{ form.content }}</div>
+                <div class="form-row">{{ form.tag.label_tag }} {{ form.tag }}</div>
+            </fieldset>
+
+            <div class="submit-row">
+                <input type="submit" value="Submit" />
+            </div>
+
+            <script type="text/javascript">$('#id_title').focus();</script>
+        </form>
+    </div>
+{% endblock %}
