@@ -3,14 +3,16 @@ from django.utils.encoding import python_2_unicode_compatible
 
 from django.db import models
 from django.urls import reverse #django 버젼이 1.10 이상일 경우
-
 from photo.fields import ThumbnailImageField
+
+from django.contrib.auth.models import User
 
 # Create your models here.
 @python_2_unicode_compatible
 class Album(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField('One Line Description', max_length=100, blank=True)
+    owner = models.ForeignKey(User,  null=True, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['name']
@@ -28,6 +30,7 @@ class Photo(models.Model):
     image = ThumbnailImageField(upload_to='photo/%Y/%m')
     description = models.TextField('Photo Description', blank=True)
     upload_date = models.DateTimeField('Upload Date', auto_now_add=True)
+    owner = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['title']

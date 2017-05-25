@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Django Bookmark Form{% endblock %}
+{% block title %}Blog Post Form{% endblock %}
 
 {% load staticfiles %}
 {% block extrastyle %}{% static "css/forms.css" %}{% endblock %}
@@ -11,7 +11,7 @@
 
         <form action="" method="post">{% csrf_token %}
             {% if form.errors %}
-                <p class="errornote">앗 이런! 입력한 내용에 문제가 있네요.<</p>
+                <p class="errornote">앗 이런! 입력한 내용에 문제가 있네요.</p>
             {% endif %}
 
             <p>본인의 포스트를 추가하거나 수정할 수 있습니다.</p>

@@ -17,8 +17,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
-
-from pdp_django.views import HomeView, UserCreateView, UserCreateDoneTV
+from pdp_django.views import *
 
 urlpatterns = [
     url(r'^$', HomeView.as_view(), name='home'),
@@ -31,4 +30,9 @@ urlpatterns = [
     url(r'^accounts/register/done/$', UserCreateDoneTV.as_view(), name='register_done'),
 
     url(r'^admin/', admin.site.urls),
-] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT, insecure=True) + static(settings.ASSETS_URL, document_root=settings.ASSETS_ROOT, insecure=True)
+
+handler400 = 'pdp_django.views.custom_400'
+handler403 = 'pdp_django.views.custom_403'
+handler404 = 'pdp_django.views.custom_404'
+handler500 = 'pdp_django.views.custom_500'

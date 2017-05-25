@@ -1,0 +1,24 @@
+{% extends 'error/error_base.html' %}
+{% block title %}Error Page{% endblock %}
+{% load staticfiles %}
+{% block content %}
+    <section id="error-page">
+        <div class="error-page-inner">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="text-center">
+                            <div class="bg-404">
+                                <div class="error-image">
+                                    <p style="font-size: 210px;font-weight: bold;margin-top:50px; margin-bottom:100px;" class="img-responsive">{{ status_code }}</p>
+                                </div>
+                            </div>
+                            <h2>{{ status_msg }}</h2>
+                            <a href="/" class="btn btn-error">RETURN TO THE HOMEPAGE</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

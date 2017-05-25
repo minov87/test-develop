@@ -1,3 +1,4 @@
+from django.http import request
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.dates import ArchiveIndexView, YearArchiveView, MonthArchiveView
@@ -15,16 +16,30 @@ from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from pdp_django.views import LoginRequiredMixin
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+
 
 # Create your views here.
 class TagTV(TemplateView):
     template_name = 'tagging/tagging_cloud.html'
 
 class PostLV(ListView):
-    model = Post
     template_name = 'blog/post_all.html'
     context_object_name = 'posts'
-    paginate_by = 2
+    #paginate_by = 2
+    model = Post
+
+    def index(request):
+        post_list = Post.objects.all()
+        page = request.GET.get('page', 1)
+        paginator = Paginator(post_list, 10)
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+        return render(request, 'blog/post_all.html', { 'posts': posts })
 
 class PostTOL(TaggedObjectList):
     model = Post

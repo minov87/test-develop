@@ -7,11 +7,6 @@
 
 {% block content %}
     <div id="content_home">
-        <div id="homeimg">
-            <a href="/"><img src="{% static 'img/background.jpg' %}" style="height:300px;" /></a>
-            <h4 style="margin: 0;">This is Django powered web site.</h4>
-        </div>
-
         <hr style="margin: 5px 0;">
 
         <h2>Select App</h2>
@@ -20,22 +15,22 @@
             <tr>
                 <td><a class="abi" href="{% url 'bookmark:index' %}">Bookmark</a></td>
                 <td>Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~</td>
-                <td class="Edit"><a class="ai" href="#">Add</a></td>
-                <td class="Edit"><a class="ai" href="#">Change</a></td>
+                <td class="Edit"><a class="ai" href="{% url 'bookmark:add' %}">Add</a></td>
+                <td class="Edit"><a class="ai" href="{% url 'bookmark:change' %}">Change</a></td>
             </tr>
 
             <tr>
                 <td><a class="abi" href="{% url 'blog:index' %}">Blog</a></td>
                 <td>Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~</td>
-                <td class="Edit"><a class="ai" href="#">Add</a></td>
-                <td class="Edit"><a class="ai" href="#">Change</a></td>
+                <td class="Edit"><a class="ai" href="{% url 'blog:add' %}">Add</a></td>
+                <td class="Edit"><a class="ai" href="[% url 'blog:change' %]">Change</a></td>
             </tr>
 
             <tr>
-                <td><a class="abi" href="#">Photo</a></td>
+                <td><a class="abi" href="{% url 'photo:index'%}">Photo</a></td>
                 <td>Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~ Blah~</td>
-                <td class="Edit"><a class="ai" href="#">Add</a></td>
-                <td class="Edit"><a class="ai" href="#">Change</a></td>
+                <td class="Edit"><a class="ai" href="{% url 'photo:album_add' %}">Add</a></td>
+                <td class="Edit"><a class="ai" href="{% url 'photo:album_change' %}">Change</a></td>
             </tr>
         </table>
     </div>

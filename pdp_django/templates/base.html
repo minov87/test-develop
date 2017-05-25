@@ -1,58 +1,165 @@
 <!DOCTYPE html>
 <html lang="ko">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
         <title>{% block title %}Django Web Programming{% endblock %}</title>
 
         {% load staticfiles %}
-        <link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}" />
-        <link rel="stylesheet" type="text/css" href="{% block extrastyle %}{% endblock %}" />
-        <script type="text/javascript" src="{% static "js/jquery-3.2.0.min.js" %}"></script>
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/main.css' %}" rel="stylesheet">
+        <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+
+        <!--[if lt IE 9]>
+        <script src="{% static 'js/html5shiv.js' %}"></script>
+        <script src="{% static 'js/respond.min.js' %}"></script>
+        <![endif]-->
+
+        <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/wow.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
+        <link rel="shortcut icon" href="{% static 'images/ico/favicon.ico' %}">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'images/ico/apple-touch-icon-144-precomposed.png' %}">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'images/ico/apple-touch-icon-114-precomposed.png' %}">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'images/ico/apple-touch-icon-72-precomposed.png' %}">
+        <link rel="apple-touch-icon-precomposed" href="{% static 'images/ico/apple-touch-icon-57-precomposed.png' %}">
     </head>
     <body>
-        <div id="header">
-            <h2 class="maintitle">PDP Django Web Programming</h2>
-            <h4 class="welcome">Welcome,
-                {% if user.is_active %}
-                    <strong>{% firstof user.get_short_name user.get_username %}</strong> /
-                    <a href="{% url 'password_change' %}">Change pwd</a> /
-                    <a href="{% url 'logout' %}">Logout</a>
-                {% else %}
-                    Guest /
-                    <a href="{% url 'login' %}">Login</a> /
-                    <a href={% url 'register' %}>Register</a>
-                {% endif %}
-            </h4>
-        </div>
+        <header id="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 overflow">
+                        <div class="social-icons pull-right">
+                            <ul class="nav nav-pills">
+                                <li><a target="_blank" href="https://www.facebook.com/minovs"><i class="fa fa-facebook"></i></a></li>
+                                <li><a target="_blank" href="https://plus.google.com/118152748218641637043"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a target="_blank" href="https://www.linkedin.com/in/minov87/"><i class="fa fa-linkedin"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="navbar navbar-inverse" role="banner">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
 
-        <div id="menu">
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'bookmark:index' %}">Bookmark</a></li>
-            <li><a href="{% url 'blog:index' %}">Blog</a></li>
-            <li><a href="{% url 'photo:index' %}">Photo</a></li>
-            <li>
-                <a href="">Add&bigtriangledown;</a>
-                <ul>
-                    <li><a href="{% url 'bookmark:add' %}">Bookmark</a></li>
-                    <li><a href="{% url 'blog:add' %}">Blog</a></li>
-                    <li><a href="#">Photo</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="">Change&bigtriangledown;</a>
-                <ul>
-                    <li><a href="{% url 'bookmark:change' %}">Bookmark</a></li>
-                    <li><a href="{% url 'blog:change' %}">Blog</a></li>
-                    <li><a href="#">Photo</a></li>
-                </ul>
-            </li>
-            <li><a href="{% url 'blog:post_archive' %}">Archive</a></li>
-            <li><a href="{% url 'blog:search' %}">Search</a></li>
-            <li><a href="{% url 'admin:index' %}">Admin</a></li>
-        </div>
+                        <a class="navbar-brand" href="{% url 'home' %}">
+                            <h1><img src="images/logo.png" alt="logo"></h1>
+                        </a>
 
-        {% block content %}{% endblock %}
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="active"><a href="{% url 'home' %}">Home</a></li>
+                            <li class="dropdown"><a href="{% url 'bookmark:index' %}">Bookmark <i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    <li><a href="{% url 'bookmark:add' %}">Add</a></li>
+                                    <li><a href="{% url 'bookmark:change' %}">Change</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a href="{% url 'blog:index' %}">Blog <i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    <li><a href="{% url 'blog:add' %}">Add</a></li>
+                                    <li><a href="{% url 'blog:change' %}">Change</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a href="{% url 'photo:index' %}">Photo <i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    <li><a href="{% url 'photo:album_add' %}">Album Add</a></li>
+                                    <li><a href="{% url 'photo:photo_add' %}">Photo Add</a></li>
+                                    <li><a href="{% url 'photo:album_change' %}">Album Change</a></li>
+                                    <li><a href="{% url 'photo:photo_change' %}">Photo Change</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="{% url 'blog:post_archive' %}">Archive</a></li>
+                            <li><a href="{% url 'admin:index' %}">Admin</a></li>
 
-        {% block footer %}{% endblock %}
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if user.is_active %}
+                            <li><a href="#">Hello, {% firstof user.get_short_name user.get_username %}</a></li>
+                            <li><a href="{% url 'password_change' %}">Change pwd</a></li>
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
+                            {% else %}
+                            <li><a href="{% url 'login' %}">Login</a></li>
+                            <li><a href="{% url 'register' %}">Register</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="search">
+                        <form action="/blog/search/" method="post"> {% csrf_token %}
+                            <i class="fa fa-search"></i>
+                            <div class="field-toggle">
+                                <input type="text" name="search_word" id="id_search_word" class="search-form" autocomplete="off" placeholder="Search">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section id="page-breadcrumb">
+            <div class="vertical-center sun">
+                <div class="container">
+                    <div class="row">
+                        <div class="action">
+                            <div class="col-sm-12">
+                                <h1 class="title">{% block top_title %}Main{% endblock %}</h1>
+                                <p>{% block top_desc %}{% endblock %}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--/#page-breadcrumb-->
+
+        <section id="blog-details" class="padding-top">
+            <div class="container">
+                {% block content %}{% endblock %}
+            </div>
+        </section>
+        <!--/#blog-->
+
+        <footer id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 text-center bottom-separator">
+                        <img src="{% static 'images/home/under.png'%}" class="img-responsive inline" alt="">
+                    </div>
+                    <div class="col-md-3 col-sm-6" style="margin-left:35%">
+                        <div class="contact-info bottom">
+                            <h2>Contacts</h2>
+                            <address>
+                                E-mail: <a href="mailto:minov@minov.co.kr">minov@minov.co.kr</a> <br>
+                            </address>
+
+                            <h2>Address</h2>
+                            <address>
+                                Republic of Korea <br>
+                            </address>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="copyright-text text-center">
+                            <p>&copy; Minov 2017. All Rights Reserved.</p>
+                            <p>Designed by <a target="_blank" href="http://www.themeum.com">Themeum</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!--/#footer-->
     </body>
 </html>

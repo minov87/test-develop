@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Album-Photo Form{% endblock %}
+
+{% load staticfiles %}
+{% block extrastyle %}{% static "css/forms.css" %}{% endblock %}
+
+{% block content %}
+    <div id="content">
+        <h1>Album-Photo InlineFormSet</h1>
+            {% if form.is_multipart or formset.is_multipart %}
+            <form enctype="multipart/form-data" method="post" action=".">
+            {% else %}
+            <form method="post" action=".">
+            {% endif %}
+            {% csrf_token %}
+
+                {% if form.errors or formset.errors %}
+                <p class="errornote">앗 이런! 입력한 내용에 문제가 있네요.</p>
+                {% endif %}
+
+                <h4>앨범 내용 추가 및 수정</h4>
+
+                <fieldset class="aligned">
+                    <div class="form-row">{{ form.name.label_tag }} {{ form.name }}</div>
+                    <div class="form-row">{{ form.description.label_tag }} {{ form.description }}</div>
+                </fieldset>
+
+                <h4>사진 내용 추가 및 수정</h4>
+                {{ formset.management_form }}
+                {% for form in formset %}
+                    {{ form.id }}
+                    <fieldset class="aligned">
+                        <div class="form-row">{{ form.image.label_tag }} {{ form.image }}</div>
+                        <div class="form-row">{{ form.title.label_tag }} {{ form.title }}</div>
+                        <div class="form-row">{{ form.description.label_tag }} {{ form.description }}</div>
+                    </fieldset>
+                {% endfor %}
+
+                <div class="submit-row">
+                    <input type="submit" value="Submit" />
+                </div>
+
+                <script type="text/javascript">$('#id_name').focus();</script>
+            </form>
+    </div>
+{% endblock %}

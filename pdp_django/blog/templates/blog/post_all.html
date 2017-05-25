@@ -1,28 +1,80 @@
 {% extends "base.html" %}
 
-{% block title %}Django Blog Post List{% endblock %}
-
+{% block title %}Blog Post List{% endblock %}
+{% block top_title %}Blog Post list{% endblock %}
 {% block content %}
-    <div id="content">
-        <h1>Blog list</h1>
-        {% for post in posts %}
-            <h2><a href='{{post.get_absolute_url}}'>{{ post.title }}</a></h2>
-            {{ post.modify_date|date:"N d, Y" }}
-        {% endfor %}
 
-        <br />
-        <div>
-            <span>
+<div class="row">
+    <div class="col-md-9 col-sm-7">
+        <div class="row">
+            {% for post in posts %}
+            <div class="col-sm-12 col-md-12">
+                <div class="single-blog single-column">
+                    <div class="post-content overflow">
+                        <h2 class="post-title bold"><a href='{{post.get_absolute_url}}'>{{ post.title }}</a></h2>
+                        <h3 class="post-author"><a href="#">{{ post.owner }}</a></h3>
+                        <h3 class="post-author">{{ post.modify_date|date:"N d, Y" }}</h3>
+                        <p>{{ post.discription|slice:"0:100" }}</p>
+                        <a href="{{post.get_absolute_url}}" class="read-more">View More</a>
+                        <div class="post-bottom overflow">
+                            <ul class="nav navbar-nav post-nav">
+                                <li><a href="#"><i class="fa fa-tag"></i>Creative</a></li>
+                                <li><a href="#"><i class="fa fa-heart"></i>32 Love</a></li>
+                                <li><a href="#"><i class="fa fa-comments"></i>3 Comments</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="blog-pagination">
+            <ul class="pagination">
                 {% if page_obj.has_previous %}
-                    <a href="?page={{ page_obj.previous_page_number }}">이전 페이지</a>
+                <li><a href="?page={{ page_obj.previous_page_number }}">이전 페이지</a></li>
                 {% endif %}
 
-                Page {{ page_obj.number }} of {{ page_obj.paginator.num_psges }}
+                {% for i in posts.paginator.page_range %}
+                    {% if post.number == i %}
+                    <li class="active">{{ i }}</li>
+                    {% else %}
+                    <li><a href="?page={{i}}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
 
-                {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">다음 페이지</a>
+                {% if page_obj.has_previous %}
+                <li><a href="?page={{ page_obj.next_page_number }}">다음 페이지</a></li>
                 {% endif %}
-            </span>
+            </ul>
         </div>
     </div>
+    <div class="col-md-3 col-sm-5">
+        <div class="sidebar blog-sidebar">
+            <div class="sidebar-item categories">
+                <h3>Categories</h3>
+                <ul class="nav navbar-stacked">
+                    <li><a href="#">Lorem ipsum<span class="pull-right">(1)</span></a></li>
+                    <li class="active"><a href="#">Dolor sit amet<span class="pull-right">(8)</span></a></li>
+                    <li><a href="#">Adipisicing elit<span class="pull-right">(4)</span></a></li>
+                    <li><a href="#">Sed do<span class="pull-right">(9)</span></a></li>
+                    <li><a href="#">Eiusmod<span class="pull-right">(3)</span></a></li>
+                    <li><a href="#">Mockup<span class="pull-right">(4)</span></a></li>
+                    <li><a href="#">Ut enim ad minim <span class="pull-right">(2)</span></a></li>
+                    <li><a href="#">Veniam, quis nostrud <span class="pull-right">(8)</span></a></li>
+                </ul>
+            </div>
+            <div class="sidebar-item tag-cloud">
+                <h3>Tag Cloud</h3>
+                <ul class="nav nav-pills">
+                    <li><a href="#">Corporate</a></li>
+                    <li><a href="#">Joomla</a></li>
+                    <li><a href="#">Abstract</a></li>
+                    <li><a href="#">Creative</a></li>
+                    <li><a href="#">Business</a></li>
+                    <li><a href="#">Product</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Album-Photo List{% endblock %}
+
+{% load staticfiles %}
+{% block extrastyle %}{% static "css/forms.css" %}{% endblock %}
+
+{% block content %}
+    <div id="content">
+        <h1>Album Change - {{user}}</h1>
+
+        <table class="change-list">
+            <tr>
+                <th>이름</th>
+                <th>설명</th>
+                <th>소유자</th>
+                <th>수정</th>
+                <th>삭제</th>
+            </tr>
+
+            {% for item in object_list %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.description|linebreaks }}</td>
+                <td>{{ item.owner }}</td>
+                <td><a href="{% url 'photo:album_update' item.id %}">수정</a></td>
+                <td><a href="{% url 'photo:album_delete' item.id %}">삭제</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
